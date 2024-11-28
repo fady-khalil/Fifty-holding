@@ -37,16 +37,16 @@ const Values = () => {
     },
   ];
   return (
-    <section className="bg-dark_primary  py-32">
+    <section className="bg-dark_primary  py-20 lg:py-32">
       <Container>
         <h6 className="text-center text-secondary mb-10 text-4xl uppercase">
           {t("values")}
         </h6>
-        <div className="flex items-center gap-x-6">
+        <div className="flex flex-col lg:flex-row items-center gap-6">
           {data.map(({ title, text, icon }, index) => (
             <div
               key={index}
-              className="flex-1 bg-primary p-4 text-center shine-effect"
+              className="w-3/4 lg:flex-1 bg-primary p-4 text-center shine-effect"
             >
               <img className="w-1/2 mx-auto object-contain" src={icon} alt="" />
               <h4 className="uppercase text-lg text-white al-medium my-2">

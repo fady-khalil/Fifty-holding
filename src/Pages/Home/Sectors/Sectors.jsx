@@ -16,12 +16,15 @@ const Sectors = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Determine the threshold value based on screen width
+    const thresholdValue = window.innerWidth <= 768 ? 0.2 : 0.5;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
       {
-        threshold: 0.5, // Trigger animation when 50% of the section is visible
+        threshold: thresholdValue, // Dynamically set threshold
       }
     );
 
@@ -81,7 +84,7 @@ const Sectors = () => {
         </h4>
 
         <motion.div
-          className="grid grid-cols-3 gap-x-6 gap-y-14"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14"
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={fadeInVariants}
@@ -97,7 +100,7 @@ const Sectors = () => {
             >
               <div className="overflow-hidden rounded-xl">
                 <img
-                  className="h-[200px] transition ease-in duration-300 group-hover:scale-[1.05] w-full rounded-xl"
+                  className="h-[250px] object-cover lg:h-[200px] transition ease-in duration-300 group-hover:scale-[1.05] w-full rounded-xl"
                   src={image}
                   alt={title}
                 />

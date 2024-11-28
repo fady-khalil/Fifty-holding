@@ -68,7 +68,7 @@ const Header = () => {
           <div>
             <img
               className={`cursor-pointer transition-width ease-in duration-200 py-2 xl:mx-auto object-contain ${
-                isSticky ? "lg:w-1/3" : "w-[10rem] lg:w-3/4"
+                isSticky ? "w-[6rem] lg:w-1/3" : "w-[10rem] lg:w-3/4"
               }`}
               src={logo}
               alt="Company Logo"

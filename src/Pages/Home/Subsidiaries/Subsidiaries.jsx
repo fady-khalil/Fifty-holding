@@ -88,14 +88,14 @@ const Subsidiaries = () => {
 
         {/* Subsidiaries Cards */}
         <motion.div
-          className="flex gap-x-8"
+          className="flex flex-col lg:flex-row gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"} // Replay animation based on visibility
         >
           {data.map(({ image, logo }, index) => (
             <motion.div
-              className="background-cover group h-[600px] flex-1 relative p-2 flex items-center justify-center"
+              className="background-cover group min-h-[600px] flex-1 relative p-2 flex items-center justify-center"
               key={index}
               variants={cardVariants}
             >
@@ -104,7 +104,7 @@ const Subsidiaries = () => {
                 <img
                   src={image}
                   alt={`Subsidiary Background ${index + 1}`}
-                  className="w-full h-full transition ease-in duration-500 group-hover:scale-[1.1]"
+                  className="w-full h-full object-cover transition ease-in duration-500 group-hover:scale-[1.1]"
                 />
               </div>
 
@@ -114,7 +114,7 @@ const Subsidiaries = () => {
                   className="w-3/4 h-3/4 object-contain"
                   src={logo}
                   alt={`Subsidiary Logo ${index + 1}`}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileHover={{ scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 />
               </div>

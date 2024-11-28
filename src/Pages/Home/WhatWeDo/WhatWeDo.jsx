@@ -12,12 +12,15 @@ const WhatWeDo = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Determine the threshold value based on screen width
+    const thresholdValue = window.innerWidth <= 768 ? 0.2 : 0.5;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
       {
-        threshold: 0.5, // Trigger animation when 50% of the section is visible
+        threshold: thresholdValue, // Dynamically set threshold
       }
     );
 
@@ -30,7 +33,7 @@ const WhatWeDo = () => {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, []);
+  }, []); // Empty dependency array ensures this runs only once
 
   const fadeInVariants = {
     hidden: { opacity: 0, y: 20 }, // Initial state
@@ -69,7 +72,7 @@ const WhatWeDo = () => {
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={fadeInVariants}
-          className="flex gap-x-6"
+          className="flex flex-col lg:flex-row  gap-6"
         >
           {data?.map(({ title, text, image }, index) => (
             <motion.div
@@ -83,7 +86,7 @@ const WhatWeDo = () => {
               <div className="relative">
                 <div className="overflow-hidden rounded-2xl">
                   <img
-                    className="h-[350px] transition ease-in duration-300 group-hover:scale-[1.05] object-cover rounded-2xl"
+                    className="h-[350px] w-full transition ease-in duration-300 group-hover:scale-[1.05] object-cover rounded-2xl"
                     src={image}
                     alt=""
                   />

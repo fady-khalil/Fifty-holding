@@ -9,11 +9,11 @@ const Footer = () => {
   return (
     <footer className=" border-t-[2px]  border-primary">
       <Container className="py-14">
-        <div className="flex items-center justify-center">
-          <img className="w-[14rem] mx-auto" src={logo} alt="" />
+        <div className="flex lg:items-center lg:justify-center">
+          <img className="w-[14rem] md:mx-auto" src={logo} alt="" />
         </div>
 
-        <nav className="uppercase text-primary min-h-full  flex-1 flex items-center justify-center mt-14  gap-x-8 text-sm font-[600]">
+        <nav className="uppercase text-primary min-h-full  flex-1 flex flex-col md:flex-row md:items-center md:justify-center mt-14 gap-y-4  gap-x-8 text-sm font-[600]">
           <a href="/">{t("Home")}</a>
           <a href="/">{t("about")}</a>
           <a href="/">{t("What_we_do")}</a>
@@ -23,8 +23,10 @@ const Footer = () => {
         </nav>
       </Container>
 
-      <div className="bg-[#afc2af] text-center py-4  text-white">
-        <p>All Rights Reserved International Fifty Hodling Co 2024</p>
+      <div className="bg-[#afc2af] md:text-center py-4  text-white">
+        <Container>
+          <p>All Rights Reserved International Fifty Hodling Co 2024</p>
+        </Container>
       </div>
     </footer>
   );
