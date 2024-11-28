@@ -34,7 +34,7 @@ const About = () => {
 
         <div className="py-32 flex gap-x-10 px-32">
           {values.map(({ title, text }, index) => (
-            <div className="flex-1 border border-secondary px-8 py-4 text-center text-white rounded-xl">
+            <div className="flex-1 border transition ease-in duration-300 border-secondary hover:bg-secondary hover:border-priamry px-8 py-4 text-center text-white rounded-xl">
               <p className="al-medium text-2xl capitalize">{title}</p>
               <p className="mt-1 text-lg">{text}</p>
             </div>

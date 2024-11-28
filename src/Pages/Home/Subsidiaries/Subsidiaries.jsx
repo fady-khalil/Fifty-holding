@@ -29,11 +29,18 @@ const Subsidiaries = () => {
         <div className="flex gap-x-8">
           {data.map(({ image, logo }, index) => (
             <div
-              className="background-cover h-[600px] flex-1 p-2 flex items-center justify-center"
-              style={{ backgroundImage: `url(${image})` }}
+              className="background-cover group h-[600px] flex-1 relative p-2 flex items-center justify-center"
+              // style={{ backgroundImage: `url(${image})` }}
               key={index}
             >
-              <div className="bg-white rounded-xl p-4 h-1/2 w-1/2 flex items-center justify-center ">
+              <div className="absolute overflow-hidden inset-0 w-full h-full">
+                <img
+                  src={image}
+                  alt=""
+                  className="w-full h-full transition ease-in duration-500 group-hover:scale-[1.1]"
+                />
+              </div>
+              <div className="bg-white transition ease-in duration-300  bg-opacity-80 group-hover:bg-opacity-100 rounded-xl p-4 h-1/2 w-1/2 flex items-center justify-center relative z-[10] ">
                 <img
                   className="w-3/4 h-3/4  object-contain"
                   src={logo}

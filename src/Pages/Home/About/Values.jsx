@@ -44,7 +44,10 @@ const Values = () => {
         </h6>
         <div className="flex items-center gap-x-6">
           {data.map(({ title, text, icon }, index) => (
-            <div key={index} className="flex-1 bg-primary p-4 text-center">
+            <div
+              key={index}
+              className="flex-1 bg-primary p-4 text-center shine-effect"
+            >
               <img className="w-1/2 mx-auto object-contain" src={icon} alt="" />
               <h4 className="uppercase text-lg text-white al-medium my-2">
                 {title}

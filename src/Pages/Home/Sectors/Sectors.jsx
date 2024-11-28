@@ -46,9 +46,15 @@ const Sectors = () => {
 
         <div className="grid grid-cols-3 gap-x-6 gap-y-14">
           {data.map(({ title, image }, index) => (
-            <div key={index}>
-              <img className="h-[200px] w-full rounded-xl" src={image} alt="" />
-              <p className="text-center text-xl mt-2 uppercase text-white">
+            <div key={index} className="group">
+              <div className="overflow-hidden rounded-xl">
+                <img
+                  className="h-[200px] transition ease-in duration-300 group-hover:scale-[1.05] w-full rounded-xl"
+                  src={image}
+                  alt=""
+                />
+              </div>
+              <p className="text-center transition ease-in duration-300  group-hover:text-primary text-xl mt-2 uppercase text-white">
                 {title}
               </p>
             </div>

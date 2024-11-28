@@ -32,14 +32,16 @@ const WhatWeDo = () => {
         </h3>
         <div className="flex gap-x-6">
           {data?.map(({ title, text, image }, index) => (
-            <div className="flex-1 rounded-2xl" key={index}>
+            <div className="flex-1 group rounded-2xl" key={index}>
               <div className="relative">
-                <img
-                  className="h-[350px] object-cover rounded-2xl"
-                  src={image}
-                  alt=""
-                />
-                <div className="w-3/4 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-white bg-black bg-opacity-40 backdrop-blur-xs text-center text-3xl p-10 rounded-xl">
+                <div className="overflow-hidden rounded-2xl">
+                  <img
+                    className="h-[350px] transition ease-in duration-300 group-hover:scale-[1.05] object-cover rounded-2xl"
+                    src={image}
+                    alt=""
+                  />
+                </div>
+                <div className="w-3/4 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 transition ease-in duration-300 text-white bg-black bg-opacity-40 group-hover:bg-opacity-60  backdrop-blur-xs text-center text-3xl p-10 rounded-xl">
                   <p>{title}</p>
                 </div>
               </div>

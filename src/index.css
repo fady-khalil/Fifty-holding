@@ -46,3 +46,38 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%);
+  }
+}
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 140%;
+  rotate: 45deg;
+  height: 140%;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  transform: translateX(-140%);
+  transition: transform 0.8s ease-in-out;
+}
+
+.shine-effect:hover::before {
+  transform: translateX(140%);
+}

@@ -4,7 +4,17 @@ import Container from "Components/Container/Container";
 import { useTranslation } from "react-i18next";
 const Hero = () => {
   const { t } = useTranslation();
-
+  const handleNavigation = (e, sectionId) => {
+    e.preventDefault();
+    if (sectionId === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
   return (
     <section className="mt-4 relative">
       <div className="px-[1.5rem] md:px-[3rem] xl:px-[6px] xxl:px-[4rem]">
@@ -18,7 +28,10 @@ const Hero = () => {
             </h1>
             <p className="lg:text-3xl">{t("hero_subTitle")}</p>
 
-            <button className="bg-secondary px-6 py-2 mt-14 ">
+            <button
+              onClick={(e) => handleNavigation(e, "about")}
+              className="bg-secondary transition ease-in duration-300 border border-transparent hover:border-secondary hover:bg-transparent px-6 py-2 mt-14 "
+            >
               {" "}
               {t("Learn_more")}
             </button>
