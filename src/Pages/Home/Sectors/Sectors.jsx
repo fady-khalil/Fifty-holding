@@ -17,7 +17,7 @@ const Sectors = () => {
 
   useEffect(() => {
     // Determine the threshold value based on screen width
-    const thresholdValue = window.innerWidth <= 768 ? 0.2 : 0.5;
+    const thresholdValue = window.innerWidth <= 768 ? 0.2 : 0.4;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -41,7 +41,7 @@ const Sectors = () => {
 
   // Fade-in animation for the grid items
   const fadeInVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,

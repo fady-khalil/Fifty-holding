@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import banner from "assets/banner.jpg";
-import Container from "Components/Container/Container";
+import banner_ar from "assets/banner-ar.jpg";
 import { useTranslation } from "react-i18next";
 
 const Hero = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -57,7 +57,11 @@ const Hero = () => {
       <div className="px-[1.5rem] md:px-[3rem] xl:px-[6px] xxl:px-[4rem]">
         <div
           className="py-14 md:py-20 md:px-8 px-4 xl:px-12 xl:py-24 bg-cover bg-center rounded-2xl lg:rounded-[72px]"
-          style={{ backgroundImage: `url(${banner})` }}
+          style={{
+            backgroundImage: `url(${
+              i18n.language === "ar" ? banner_ar : banner
+            })`,
+          }}
         >
           <motion.div
             initial="hidden"
@@ -65,7 +69,11 @@ const Hero = () => {
             variants={containerVariants}
             className="text-white md:w-3/4 lg:w-[60%]"
           >
-            <h1 className="text-2xl md:text-4xl lg:text-5xl xxl:text-6xl uppercase al-bold leading-[1.2]">
+            <h1
+              className={`text-2xl md:text-4xl lg:text-5xl xxl:text-6xl uppercase al-bold ${
+                i18n.language === "ar" ? "xxl:leading-snug" : "xxl:leading-none"
+              } `}
+            >
               {t("hero_title")}
             </h1>
             <p className="text-lg md:text-2xl xl:text-3xl">

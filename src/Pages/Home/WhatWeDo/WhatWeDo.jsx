@@ -13,7 +13,7 @@ const WhatWeDo = () => {
 
   useEffect(() => {
     // Determine the threshold value based on screen width
-    const thresholdValue = window.innerWidth <= 768 ? 0.2 : 0.5;
+    const thresholdValue = window.innerWidth <= 768 ? 0.2 : 0.4;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -36,7 +36,7 @@ const WhatWeDo = () => {
   }, []); // Empty dependency array ensures this runs only once
 
   const fadeInVariants = {
-    hidden: { opacity: 0, y: 20 }, // Initial state
+    hidden: { opacity: 0, y: 50 }, // Initial state
     visible: {
       opacity: 1,
       y: 0,
