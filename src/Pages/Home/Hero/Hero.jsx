@@ -6,10 +6,10 @@ const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="mt-2 relative">
-      <Container>
+    <section className="mt-4 relative">
+      <div className="px-[1.5rem] md:px-[3rem] xl:px-[6px] xxl:px-[4rem]">
         <div
-          className="lg:px-12 lg:py-24 bg-cover bg-center rounded-[99px]"
+          className="lg:px-12 lg:py-24 bg-cover bg-center rounded-[72px]"
           style={{ backgroundImage: `url(${banner})` }}
         >
           <div className="text-white lg:w-[60%]">
@@ -24,7 +24,7 @@ const Hero = () => {
             </button>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 };

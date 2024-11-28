@@ -50,7 +50,11 @@ const Header = () => {
           <LanguageSwitcher />
         </div>
         <div className="flex justify-between uppercase text-primary">
-          <nav className="hidden min-h-full smt-auto flex-1 xl:flex items-center gap-x-6 text-sm font-[600]">
+          <nav
+            className={`hidden min-h-full ${
+              isSticky ? "justify-end gap-x-10" : "mt-auto gap-x-6 "
+            } flex-1 xl:flex items-center  text-sm font-[600]`}
+          >
             <a href="/" onClick={(e) => handleNavigation(e, "top")}>
               {t("Home")}
             </a>
@@ -71,7 +75,11 @@ const Header = () => {
               onClick={(e) => handleNavigation(e, "top")}
             />
           </div>
-          <nav className="hidden min-h-full smt-auto flex-1 xl:flex items-center gap-x-6 text-sm font-[600] justify-end">
+          <nav
+            className={`hidden min-h-full ${
+              isSticky ? "gap-x-10" : "mt-auto justify-end gap-x-6"
+            } flex-1 xl:flex items-center  text-sm font-[600] `}
+          >
             <a href="/" onClick={(e) => handleNavigation(e, "sectors")}>
               {t("Business_sectors")}
             </a>
