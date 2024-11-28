@@ -3,12 +3,12 @@ import Container from "Components/Container/Container";
 import logo from "assets/logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { List } from "@phosphor-icons/react";
 
 const Header = () => {
   const { t } = useTranslation();
   const [isSticky, setIsSticky] = useState(false);
   const [lastScrollTop, setLastScrollTop] = useState(0);
-  const [isAtTop, setIsAtTop] = useState(true); // New state for tracking top position
 
   const handleNavigation = (e, sectionId) => {
     e.preventDefault();
@@ -27,12 +27,8 @@ const Header = () => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
 
-      setIsAtTop(scrollTop === 0);
-      if (scrollTop > lastScrollTop) {
-        setIsSticky(false); // Scrolling down
-      } else {
-        setIsSticky(scrollTop > 0); // Scrolling up and not at top
-      }
+      // Set isSticky to true if scroll is not at the top, otherwise false
+      setIsSticky(scrollTop > 0);
 
       setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
     };
@@ -43,7 +39,6 @@ const Header = () => {
     };
   }, [lastScrollTop]);
 
-  console.log();
   return (
     <header
       className={`transition ease-in duration-300  ${
@@ -51,11 +46,11 @@ const Header = () => {
       }`}
     >
       <Container className="relative">
-        <div className="absolute top-4 right-0">
+        <div className="absolute top-4 right-0 hidden lg:block">
           <LanguageSwitcher />
         </div>
         <div className="flex justify-between uppercase text-primary">
-          <nav className="min-h-full smt-auto flex-1 flex items-center gap-x-6 text-sm font-[600]">
+          <nav className="hidden min-h-full smt-auto flex-1 xl:flex items-center gap-x-6 text-sm font-[600]">
             <a href="/" onClick={(e) => handleNavigation(e, "top")}>
               {t("Home")}
             </a>
@@ -68,15 +63,15 @@ const Header = () => {
           </nav>
           <div>
             <img
-              className={`cursor-pointer transition-width ease-in duration-200 py-2 mx-auto object-contain ${
-                isSticky || !isAtTop ? "w-1/3" : "w-3/4"
+              className={`cursor-pointer transition-width ease-in duration-200 py-2 xl:mx-auto object-contain ${
+                isSticky ? "lg:w-1/3" : "w-[10rem] lg:w-3/4"
               }`}
               src={logo}
               alt="Company Logo"
               onClick={(e) => handleNavigation(e, "top")}
             />
           </div>
-          <nav className="min-h-full smt-auto flex-1 flex items-center gap-x-6 text-sm font-[600] justify-end">
+          <nav className="hidden min-h-full smt-auto flex-1 xl:flex items-center gap-x-6 text-sm font-[600] justify-end">
             <a href="/" onClick={(e) => handleNavigation(e, "sectors")}>
               {t("Business_sectors")}
             </a>
@@ -87,6 +82,10 @@ const Header = () => {
               {t("Contact_us")}
             </a>
           </nav>
+
+          <button className="xl:hidden">
+            <List size={32} />
+          </button>
         </div>
       </Container>
     </header>

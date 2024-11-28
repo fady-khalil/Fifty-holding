@@ -17,7 +17,7 @@ const About = () => {
   ];
   return (
     <section
-      className="-mt-[20vh] background bg-primary"
+      className="-mt-[20vh] background bg-primary "
       style={{ backgroundImage: `url(${banner})` }}
     >
       <Container>
@@ -32,7 +32,7 @@ const About = () => {
           <p className="text-white text-l">{t("about_text_two")}</p>
         </div>
 
-        <div className="py-32 flex gap-x-32">
+        <div className="py-32 flex gap-x-10 px-32">
           {values.map(({ title, text }, index) => (
             <div className="flex-1 border border-secondary px-8 py-4 text-center text-white rounded-xl">
               <p className="al-medium text-2xl capitalize">{title}</p>
