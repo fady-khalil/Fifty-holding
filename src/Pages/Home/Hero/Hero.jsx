@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import banner from "assets/banner.jpg";
 import Container from "Components/Container/Container";
 import { useTranslation } from "react-i18next";
+
 const Hero = () => {
   const { t } = useTranslation();
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the hero section is visible
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   const handleNavigation = (e, sectionId) => {
     e.preventDefault();
     if (sectionId === "top") {
@@ -15,27 +41,47 @@ const Hero = () => {
       }
     }
   };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
-    <section className="mt-4 relative">
+    <section ref={sectionRef} className="mt-4 relative">
       <div className="px-[1.5rem] md:px-[3rem] xl:px-[6px] xxl:px-[4rem]">
         <div
           className="lg:px-12 lg:py-24 bg-cover bg-center rounded-[72px]"
           style={{ backgroundImage: `url(${banner})` }}
         >
-          <div className="text-white lg:w-[60%]">
-            <h1 className="lg:text-6xl uppercase al-bold leading-[1.2] ">
+          <motion.div
+            initial="hidden"
+            animate={isVisible ? "visible" : "hidden"}
+            variants={containerVariants}
+            className="text-white lg:w-[60%]"
+          >
+            <h1 className="lg:text-6xl uppercase al-bold leading-[1.2]">
               {t("hero_title")}
             </h1>
             <p className="lg:text-3xl">{t("hero_subTitle")}</p>
 
-            <button
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0px 4px 10px rgba(0,0,0,0.3)",
+              }}
+              whileTap={{ scale: 0.95 }}
               onClick={(e) => handleNavigation(e, "about")}
-              className="bg-secondary transition ease-in duration-300 border border-transparent hover:border-secondary hover:bg-transparent px-6 py-2 mt-14 "
+              className="bg-secondary transition ease-in duration-300 border border-transparent hover:border-secondary hover:bg-transparent px-6 py-2 mt-14"
             >
-              {" "}
               {t("Learn_more")}
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
+import React, { useEffect, useRef, useState } from "react";
 import Container from "Components/Container/Container";
-import React from "react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 import i1 from "assets/sector/1.jpg";
 import i2 from "assets/sector/2.jpg";
@@ -11,6 +12,40 @@ import i6 from "assets/sector/6.jpg";
 
 const Sectors = () => {
   const { t } = useTranslation();
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.5, // Trigger animation when 50% of the section is visible
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  // Fade-in animation for the grid items
+  const fadeInVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
   const data = [
     {
       title: t("Construction_and_Infrastructure"),
@@ -37,29 +72,42 @@ const Sectors = () => {
       image: i6,
     },
   ];
+
   return (
-    <section className="bg-secondary py-primary">
+    <section ref={sectionRef} className="bg-secondary py-primary">
       <Container>
         <h4 className="text-3xl text-white mb-10 text-center uppercase">
           {t("Business_sectors")}
         </h4>
 
-        <div className="grid grid-cols-3 gap-x-6 gap-y-14">
+        <motion.div
+          className="grid grid-cols-3 gap-x-6 gap-y-14"
+          initial="hidden"
+          animate={isVisible ? "visible" : "hidden"}
+          variants={fadeInVariants}
+        >
           {data.map(({ title, image }, index) => (
-            <div key={index} className="group">
+            <motion.div
+              key={index}
+              className="group"
+              initial="hidden"
+              animate={isVisible ? "visible" : "hidden"}
+              variants={fadeInVariants}
+              transition={{ delay: index * 0.2 }} // Sequential fade-in for each item
+            >
               <div className="overflow-hidden rounded-xl">
                 <img
                   className="h-[200px] transition ease-in duration-300 group-hover:scale-[1.05] w-full rounded-xl"
                   src={image}
-                  alt=""
+                  alt={title}
                 />
               </div>
-              <p className="text-center transition ease-in duration-300  group-hover:text-primary text-xl mt-2 uppercase text-white">
+              <p className="text-center transition ease-in duration-300 group-hover:text-primary text-xl mt-2 uppercase text-white">
                 {title}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </Container>
     </section>
   );
