@@ -5,8 +5,9 @@ import Container from "Components/Container/Container";
 
 import image1 from "assets/Subs/l2bg.png";
 import logo1 from "assets/Subs/l2.png";
+// import logo1 from "assets/Subs/l2.png";
 import image2 from "assets/Subs/l3bg.png";
-import logo2 from "assets/Subs/l3.png";
+import logo2 from "assets/Subs/test.png";
 
 const Subsidiaries = () => {
   const { t } = useTranslation();

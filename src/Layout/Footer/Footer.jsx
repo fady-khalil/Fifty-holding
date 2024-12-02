@@ -87,10 +87,10 @@ const Footer = () => {
             <a
               className="hover:underline"
               target="_blank"
-              href="https://www.dowgroup.com/"
+              href="https://www.brandraw.sa/"
               rel="noreferrer"
             >
-              Dow Group
+              Brandraw
             </a>
           </p>
         </Container>
