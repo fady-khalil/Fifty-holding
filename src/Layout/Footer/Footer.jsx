@@ -31,6 +31,15 @@ const Footer = () => {
           <p class="mt-2 text-primary font-medium md:text-center">
             {t("address")}
           </p>
+          <div className="flex items-center gap-x-2 mt-2 text-primary font-medium md:text-center">
+            <p>{t("Contact_us")}:</p>
+            <a
+              className="transiton ease-in duration-300 hover:underline hover:text-secondary"
+              href="mailto:info@50holding.sa"
+            >
+              info@50holding.sa
+            </a>
+          </div>
         </div>
 
         <nav className="uppercase  min-h-full  flex-1 flex flex-col md:flex-row md:items-center md:justify-center mt-14 gap-y-4  gap-x-8 text-sm font-[600]">
@@ -69,13 +78,13 @@ const Footer = () => {
           >
             {t("Our_subsidiaries")}
           </a>
-          <a
+          {/* <a
             className="transition ease-in duration-300 text-primary hover:underline hover:text-secondary"
             onClick={(e) => handleNavigation(e, "contact")}
             href="/"
           >
             {t("Contact_us")}
-          </a>
+          </a> */}
         </nav>
       </Container>
 

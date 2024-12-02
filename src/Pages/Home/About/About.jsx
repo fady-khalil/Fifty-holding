@@ -28,13 +28,16 @@ const About = () => {
           <p className="mt-2 text-white text-2xl lg:text-3xl al-medium">
             {t("about_header")}
           </p>
-          <p className="text-white text-l">{t("about_text_one")}</p>
+          <p className="text-white text-l my-3">{t("about_text_one")}</p>
           <p className="text-white text-l">{t("about_text_two")}</p>
         </div>
 
-        <div className="py-20 lg:py-32 flex flex-col lg:flex-row gap-10 lg:px-32">
+        <div className="py-20 lg:py-32 flex flex-col lg:flex-row gap-10 ">
           {values.map(({ title, text }, index) => (
-            <div className="flex-1 border transition ease-in duration-300 border-secondary hover:bg-secondary hover:border-priamry px-8 py-4 text-center text-white rounded-xl">
+            <div
+              key={index}
+              className="flex-1 border transition ease-in duration-300 border-secondary hover:bg-secondary hover:border-priamry px-8 py-4 text-center text-white rounded-xl"
+            >
               <p className="al-medium text-2xl capitalize">{title}</p>
               <p className="mt-1 text-lg">{text}</p>
             </div>
