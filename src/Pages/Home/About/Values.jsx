@@ -42,11 +42,11 @@ const Values = () => {
         <h6 className="text-center text-secondary mb-10 text-4xl uppercase">
           {t("values")}
         </h6>
-        <div className="flex flex-col lg:flex-row items-center gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {data.map(({ title, text, icon }, index) => (
             <div
               key={index}
-              className="w-3/4 lg:flex-1 bg-primary p-4 text-center shine-effect"
+              className="w-3/4 md:w-full mx-auto bg-primary p-4 text-center shine-effect"
             >
               <img className="w-1/2 mx-auto object-contain" src={icon} alt="" />
               <h4 className="uppercase text-lg text-white al-medium my-2">

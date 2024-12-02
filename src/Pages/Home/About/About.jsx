@@ -32,7 +32,7 @@ const About = () => {
           <p className="text-white text-l">{t("about_text_two")}</p>
         </div>
 
-        <div className="py-20 lg:py-32 flex flex-col lg:flex-row gap-10 ">
+        <div className="py-20 lg:py-32 flex flex-col lg:flex-row gap-10 lg:px-32">
           {values.map(({ title, text }, index) => (
             <div
               key={index}
