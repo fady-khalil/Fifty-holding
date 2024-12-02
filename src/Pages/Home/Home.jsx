@@ -13,13 +13,13 @@ const Home = () => {
       <section id="about">
         <About />
       </section>
-      <section id="whatWeDo">
+      <section id="What_we_do">
         <WhatWeDo />
       </section>
-      <section id="sectors">
+      <section id="Business_sectors">
         <Sectors />
       </section>
-      <section id="subsidiaries">
+      <section id="Our_subsidiaries">
         <Subsidiaries />
       </section>
     </main>

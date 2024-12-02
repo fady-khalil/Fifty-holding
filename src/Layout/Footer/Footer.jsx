@@ -50,21 +50,21 @@ const Footer = () => {
           </a>
           <a
             className="transition ease-in duration-300 text-primary hover:underline hover:text-secondary"
-            onClick={(e) => handleNavigation(e, "whatWeDo")}
+            onClick={(e) => handleNavigation(e, "What_we_do")}
             href="/"
           >
             {t("What_we_do")}
           </a>
           <a
             className="transition ease-in duration-300 text-primary hover:underline hover:text-secondary"
-            onClick={(e) => handleNavigation(e, "sectors")}
+            onClick={(e) => handleNavigation(e, "Business_sectors")}
             href="/"
           >
             {t("Business_sectors")}
           </a>
           <a
             className="transition ease-in duration-300 text-primary hover:underline hover:text-secondary"
-            onClick={(e) => handleNavigation(e, "subsidiaries")}
+            onClick={(e) => handleNavigation(e, "Our_subsidiaries")}
             href="/"
           >
             {t("Our_subsidiaries")}
