@@ -18,7 +18,7 @@ const Footer = () => {
     }
   };
   return (
-    <footer className=" border-t-[2px]  border-primary">
+    <footer id="contact" className=" border-t-[2px]  border-primary">
       <Container className="py-14">
         <div className="flex flex-col  lg:items-center lg:justify-center">
           <img
