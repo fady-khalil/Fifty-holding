@@ -3,7 +3,7 @@ import Container from "Components/Container/Container";
 import logo from "assets/logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
-
+import { List, X } from "@phosphor-icons/react";
 const Header = () => {
   const { t } = useTranslation();
   const [isSticky, setIsSticky] = useState(false);
@@ -70,7 +70,7 @@ const Header = () => {
     <header
       ref={headerRef} // Reference to the header element
       className={`transition ease-in duration-300 ${
-        isSticky ? "sticky top-0 z-[1000] bg-white" : ""
+        isSticky ? "sticky top-0 z-[1000] bg-white border-b border-primary" : ""
       }`}
     >
       <Container className={`${isSticky ? "" : "relative"}`}>
@@ -134,6 +134,89 @@ const Header = () => {
               )
             )}
           </nav>
+
+          <button onClick={toggleMobileView}>
+            {mobileMenuVisible ? <X size={32} /> : <List size={32} />}
+          </button>
+
+          {/* drawer */}
+          <div
+            className={`fixed bg-primary border-b border-white shadow-2xl shadow-[#000] right-0 w-[100vw] z-[1000] text-white transition ease-in duration-300 ${
+              mobileMenuVisible
+                ? "translate-y-[0] opacity-100 select-auto visible"
+                : "translate-y-[-150%] opacity-0 select-none invisible"
+            }`}
+            style={{
+              top: `${headerHeight}px`, // Set the top position of the drawer to the header's height
+            }}
+          >
+            <nav
+              className={`px-4 py-10 flex flex-col transition ease-in duration-500 ${
+                mobileMenuVisible ? "scale-1" : "scale-50"
+              }`}
+            >
+              <a
+                className="border-b border-white py-2"
+                href="/"
+                onClick={(e) => {
+                  toggleMobileView();
+                  handleNavigation(e, "top");
+                }}
+              >
+                {t("Home")}
+              </a>
+              <a
+                className="border-b border-white py-2"
+                href="/"
+                onClick={(e) => {
+                  toggleMobileView();
+                  handleNavigation(e, "about");
+                }}
+              >
+                {t("about")}
+              </a>
+              <a
+                className="border-b border-white py-2"
+                href="/"
+                onClick={(e) => {
+                  toggleMobileView();
+                  handleNavigation(e, "whatWeDo");
+                }}
+              >
+                {t("What_we_do")}
+              </a>
+              <a
+                className="border-b border-white py-2"
+                href="/"
+                onClick={(e) => {
+                  toggleMobileView();
+                  handleNavigation(e, "Business_sectors");
+                }}
+              >
+                {t("Business_sectors")}
+              </a>
+              <a
+                className="border-b border-white py-2"
+                href="/"
+                onClick={(e) => {
+                  toggleMobileView();
+                  handleNavigation(e, "Our_subsidiaries");
+                }}
+              >
+                {t("Our_subsidiaries")}
+              </a>
+              <a
+                className="border-b border-white py-2"
+                href="/"
+                onClick={(e) => {
+                  toggleMobileView();
+                  handleNavigation(e, "contact");
+                }}
+              >
+                {t("Contact_us")}
+              </a>
+            </nav>
+          </div>
         </div>
       </Container>
     </header>
