@@ -3,7 +3,6 @@ import Container from "Components/Container/Container";
 import logo from "assets/logo.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
-import { List } from "@phosphor-icons/react";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -11,12 +10,14 @@ const Header = () => {
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const [mobileMenuVisible, setMobileMenuVisble] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const [selectedSection, setSelectedSection] = useState(null); // New state to track the active section
 
   // Reference to the header element
   const headerRef = useRef(null);
 
   const handleNavigation = (e, sectionId) => {
     e.preventDefault();
+    setSelectedSection(sectionId); // Set the active section
     if (sectionId === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -38,6 +39,11 @@ const Header = () => {
         window.pageYOffset || document.documentElement.scrollTop;
       setIsSticky(scrollTop > 0);
       setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
+
+      // Reset selectedSection when header is at the top
+      if (scrollTop === 0) {
+        setSelectedSection(null);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -67,25 +73,34 @@ const Header = () => {
         isSticky ? "sticky top-0 z-[1000] bg-white" : ""
       }`}
     >
-      <Container className="relative">
-        <div className="absolute top-4 right-0 hidden lg:block">
+      <Container className={`${isSticky ? "" : "relative"}`}>
+        <div
+          className={`absolute transition ease-in duration-300 rounded-md p-1 hidden lg:block border border-primary ${
+            isSticky ? "top-1/2 -translate-y-1/2 right-4" : "top-4 right-0"
+          }`}
+        >
           <LanguageSwitcher />
         </div>
         <div className="flex justify-between uppercase text-primary">
           <nav
             className={`hidden min-h-full ${
-              isSticky ? "justify-end gap-x-10" : "mt-auto gap-x-6 "
+              isSticky ? "justify-end gap-x-10 " : "mt-auto gap-x-6 "
             } flex-[2] xl:flex items-center text-sm font-[600]`}
           >
-            <a href="/" onClick={(e) => handleNavigation(e, "top")}>
-              {t("Home")}
-            </a>
-            <a href="/" onClick={(e) => handleNavigation(e, "about")}>
-              {t("about")}
-            </a>
-            <a href="/" onClick={(e) => handleNavigation(e, "whatWeDo")}>
-              {t("What_we_do")}
-            </a>
+            {["top", "about", "What_we_do"].map((section) => (
+              <a
+                key={section}
+                className={`transition ease-in duration-300 hover:underline ${
+                  selectedSection === section && isSticky
+                    ? "text-secondary"
+                    : "text-primary"
+                }`}
+                href="/"
+                onClick={(e) => handleNavigation(e, section)}
+              >
+                {t(section === "top" ? "Home" : section)}
+              </a>
+            ))}
           </nav>
           <div className="flex-1">
             <img
@@ -100,133 +115,25 @@ const Header = () => {
           <nav
             className={`hidden min-h-full ${
               isSticky ? "gap-x-10" : "mt-auto justify-end gap-x-6"
-            } flex-[2] xl:flex items-center text-sm font-[600] `}
+            } flex-[2] xl:flex items-center text-sm font-[600]`}
           >
-            <a href="/" onClick={(e) => handleNavigation(e, "sectors")}>
-              {t("Business_sectors")}
-            </a>
-            <a href="/" onClick={(e) => handleNavigation(e, "subsidiaries")}>
-              {t("Our_subsidiaries")}
-            </a>
-            <a href="/" onClick={(e) => handleNavigation(e, "contact")}>
-              {t("Contact_us")}
-            </a>
+            {["Business_sectors", "Our_subsidiaries", "contact"].map(
+              (section) => (
+                <a
+                  key={section}
+                  className={`transition ease-in duration-300 hover:underline ${
+                    selectedSection === section && isSticky
+                      ? "text-secondary"
+                      : "text-primary"
+                  }`}
+                  href="/"
+                  onClick={(e) => handleNavigation(e, section)}
+                >
+                  {t(section === "contact" ? "Contact_us" : section)}
+                </a>
+              )
+            )}
           </nav>
-
-          <button onClick={toggleMobileView} className="xl:hidden">
-            {/* Custom Hamburger Icon */}
-            <div
-              className={`w-6 h-6 flex flex-col justify-between items-center transition-all duration-300 ${
-                mobileMenuVisible ? "rotate-45 space-y-0" : "space-y-1"
-              }`}
-            >
-              <div
-                className={`w-6 h-0.5 bg-black transition-all duration-300 ${
-                  mobileMenuVisible ? "rotate-90 absolute top-1/2" : ""
-                }`}
-              ></div>
-              <div
-                className={`w-6 h-0.5 bg-black transition-all duration-300 ${
-                  mobileMenuVisible ? "opacity-0" : ""
-                }`}
-              ></div>
-              <div
-                className={`w-6 h-0.5 bg-black transition-all duration-300 ${
-                  mobileMenuVisible ? "-rotate-40 absolute top-1/2" : ""
-                }`}
-              ></div>
-            </div>
-          </button>
-
-          <div
-            className={`${
-              mobileMenuVisible
-                ? "fixed bg-[#0000006d] inset-0 h-full w-full z-[100]"
-                : ""
-            }`}
-            style={{
-              top: `${headerHeight}px`, // Set the top position of the drawer to the header's height
-            }}
-          ></div>
-
-          {/* The drawer */}
-          <div
-            className={`fixed bg-primary right-0 w-[100vw] z-[1000] text-white transition ease-in duration-300 ${
-              mobileMenuVisible
-                ? "translate-y-[0] opacity-100 select-auto visible"
-                : "translate-y-[-150%] opacity-0 select-none invisible"
-            }`}
-            style={{
-              top: `${headerHeight}px`, // Set the top position of the drawer to the header's height
-            }}
-          >
-            <nav
-              className={`px-4 py-10 flex flex-col transition ease-in duration-500 ${
-                mobileMenuVisible ? "scale-1" : "scale-50"
-              }`}
-            >
-              <a
-                className="border-b border-white py-2"
-                href="/"
-                onClick={(e) => {
-                  toggleMobileView();
-                  handleNavigation(e, "top");
-                }}
-              >
-                {t("Home")}
-              </a>
-              <a
-                className="border-b border-white py-2"
-                href="/"
-                onClick={(e) => {
-                  toggleMobileView();
-                  handleNavigation(e, "about");
-                }}
-              >
-                {t("about")}
-              </a>
-              <a
-                className="border-b border-white py-2"
-                href="/"
-                onClick={(e) => {
-                  toggleMobileView();
-                  handleNavigation(e, "whatWeDo");
-                }}
-              >
-                {t("What_we_do")}
-              </a>
-              <a
-                className="border-b border-white py-2"
-                href="/"
-                onClick={(e) => {
-                  toggleMobileView();
-                  handleNavigation(e, "sectors");
-                }}
-              >
-                {t("Business_sectors")}
-              </a>
-              <a
-                className="border-b border-white py-2"
-                href="/"
-                onClick={(e) => {
-                  toggleMobileView();
-                  handleNavigation(e, "subsidiaries");
-                }}
-              >
-                {t("Our_subsidiaries")}
-              </a>
-              <a
-                className="border-b border-white py-2"
-                href="/"
-                onClick={(e) => {
-                  toggleMobileView();
-                  handleNavigation(e, "contact");
-                }}
-              >
-                {t("Contact_us")}
-              </a>
-            </nav>
-          </div>
         </div>
       </Container>
     </header>
