@@ -2,7 +2,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const LanguageSwitcher = ({ isHome }) => {
+const LanguageSwitcher = ({ isBanner }) => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
@@ -33,14 +33,13 @@ const LanguageSwitcher = ({ isHome }) => {
 
   return (
     <div>
-      {/* <div className={`${i18n.language === "ar" ? "mr-auto" : "ml-auto"}  `}> */}
-      <select onChange={handleLanguageChange} defaultValue={i18n.language}>
-        <option className="text-black" value="en">
-          English
-        </option>
-        <option className="text-black" value="ar">
-          العربية
-        </option>
+      <select
+        className={isBanner ? "bg-black text-white" : ""}
+        onChange={handleLanguageChange}
+        defaultValue={i18n.language}
+      >
+        <option value="en">English</option>
+        <option value="ar">العربية</option>
       </select>
     </div>
   );

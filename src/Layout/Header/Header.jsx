@@ -75,7 +75,7 @@ const Header = () => {
     >
       <Container className={`${isSticky ? "" : "relative"}`}>
         <div
-          className={`absolute transition ease-in duration-300 rounded-md p-1 hidden lg:block border border-primary ${
+          className={`absolute transition ease-in duration-300 rounded-md p-1 hidden xl:block border border-primary ${
             isSticky ? "top-1/2 -translate-y-1/2 right-4" : "top-4 right-0"
           }`}
         >
@@ -135,7 +135,7 @@ const Header = () => {
             )}
           </nav>
 
-          <button onClick={toggleMobileView}>
+          <button className="xl:hidden" onClick={toggleMobileView}>
             {mobileMenuVisible ? <X size={32} /> : <List size={32} />}
           </button>
 
@@ -215,6 +215,9 @@ const Header = () => {
               >
                 {t("Contact_us")}
               </a>
+              <div className="border-b border-white py-2">
+                <LanguageSwitcher isBanner={true} />
+              </div>
             </nav>
           </div>
         </div>
