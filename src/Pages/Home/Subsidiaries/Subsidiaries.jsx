@@ -75,7 +75,7 @@ const Subsidiaries = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-primary">
+    <section ref={sectionRef} className="py-primary s">
       <Container>
         {/* Section Title */}
         <motion.h3
