@@ -76,12 +76,12 @@ const Header = () => {
       <Container className={`${isSticky ? "" : "relative"}`}>
         <div
           className={`absolute transition ease-in duration-300 rounded-md p-1 hidden xl:block border border-primary ${
-            isSticky ? "top-1/2 -translate-y-1/2 right-4" : "top-4 right-0"
+            isSticky ? "top-1/2 -translate-y-1/2 right-4" : "top-0 right-0"
           }`}
         >
           <LanguageSwitcher />
         </div>
-        <div className="flex justify-between uppercase text-primary">
+        <div className="flex justify-between uppercase text-primary mt-4">
           <nav
             className={`hidden min-h-full ${
               isSticky ? "justify-end gap-x-10 " : "mt-auto gap-x-6 "
@@ -105,7 +105,7 @@ const Header = () => {
           <div className="flex-1">
             <img
               className={`cursor-pointer  transition-width ease-in duration-200  xl:mx-auto mt-2 ${
-                isSticky ? "w-3/4" : " w-full"
+                isSticky ? "w-3/4" : "w-1/2 md:w-1/3 xl:w-full"
               }`}
               src={logo}
               alt="Company Logo"
