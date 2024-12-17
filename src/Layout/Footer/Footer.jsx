@@ -1,6 +1,6 @@
 import Container from "Components/Container/Container";
 import React from "react";
-import logo from "assets/logo.png";
+import logo from "assets/50-l.jpg";
 import { useTranslation } from "react-i18next";
 
 const Footer = () => {
@@ -23,7 +23,7 @@ const Footer = () => {
         <div className="flex flex-col  lg:items-center lg:justify-center">
           <img
             onClick={(e) => handleNavigation(e, "top")}
-            className="w-[14rem] md:mx-auto"
+            className="w-[20rem] md:mx-auto"
             src={logo}
             alt=""
           />

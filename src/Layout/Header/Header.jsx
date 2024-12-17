@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Container from "Components/Container/Container";
-import logo from "assets/logo.png";
+import logo from "assets/50-l.jpg";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { List, X } from "@phosphor-icons/react";
@@ -104,8 +104,8 @@ const Header = () => {
           </nav>
           <div className="flex-1">
             <img
-              className={`cursor-pointer transition-width ease-in duration-200 py-2 xl:mx-auto object-contain ${
-                isSticky ? "w-[6rem] lg:w-1/3" : "w-[10rem] w-3/4"
+              className={`cursor-pointer  transition-width ease-in duration-200  xl:mx-auto mt-2 ${
+                isSticky ? "w-3/4" : " w-full"
               }`}
               src={logo}
               alt="Company Logo"
