@@ -3,7 +3,7 @@ import About from "./About/About";
 import WhatWeDo from "./WhatWeDo/WhatWeDo";
 import Sectors from "./Sectors/Sectors";
 import Subsidiaries from "./Subsidiaries/Subsidiaries";
-
+import OurClients from "./OurClients/OurClients";
 const Home = () => {
   return (
     <main>
@@ -19,8 +19,11 @@ const Home = () => {
       <section id="Business_sectors">
         <Sectors />
       </section>
-      <section id="Our_subsidiaries">
+      <section id="our_partners">
         <Subsidiaries />
+      </section>
+      <section id="Our_clients">
+        <OurClients />
       </section>
     </main>
   );

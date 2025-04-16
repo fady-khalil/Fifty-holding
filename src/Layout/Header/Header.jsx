@@ -117,22 +117,20 @@ const Header = () => {
               isSticky ? "gap-x-10" : "mt-auto justify-end gap-x-6"
             } flex-[2] xl:flex items-center text-sm font-[600]`}
           >
-            {["Business_sectors", "Our_subsidiaries", "contact"].map(
-              (section) => (
-                <a
-                  key={section}
-                  className={`transition ease-in duration-300 hover:underline ${
-                    selectedSection === section && isSticky
-                      ? "text-secondary"
-                      : "text-primary"
-                  }`}
-                  href="/"
-                  onClick={(e) => handleNavigation(e, section)}
-                >
-                  {t(section === "contact" ? "Contact_us" : section)}
-                </a>
-              )
-            )}
+            {["Business_sectors", "our_partners", "contact"].map((section) => (
+              <a
+                key={section}
+                className={`transition ease-in duration-300 hover:underline ${
+                  selectedSection === section && isSticky
+                    ? "text-secondary"
+                    : "text-primary"
+                }`}
+                href="/"
+                onClick={(e) => handleNavigation(e, section)}
+              >
+                {t(section === "contact" ? "Contact_us" : section)}
+              </a>
+            ))}
           </nav>
 
           <button className="xl:hidden" onClick={toggleMobileView}>
@@ -200,10 +198,10 @@ const Header = () => {
                 href="/"
                 onClick={(e) => {
                   toggleMobileView();
-                  handleNavigation(e, "Our_subsidiaries");
+                  handleNavigation(e, "our_partners");
                 }}
               >
-                {t("Our_subsidiaries")}
+                {t("our_partners")}
               </a>
               <a
                 className="border-b border-white py-2"

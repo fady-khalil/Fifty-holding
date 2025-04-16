@@ -13,7 +13,7 @@ const WhatWeDo = () => {
 
   useEffect(() => {
     // Determine the threshold value based on screen width
-    const thresholdValue = window.innerWidth <= 768 ? 0.2 : 0.4;
+    const thresholdValue = window.innerWidth <= 768 ? 0.2 : 0.2;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
