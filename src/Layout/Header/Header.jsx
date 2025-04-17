@@ -119,7 +119,7 @@ const Header = () => {
               isSticky ? "gap-x-10" : "mt-auto justify-end gap-x-6"
             } flex-[2] xl:flex items-center text-sm font-[600]`}
           >
-            {["Our_clients", "our_partners_header", "contact"].map(
+            {["our_partners_header", "Our_clients", "contact"].map(
               (section) => (
                 <a
                   key={section}
