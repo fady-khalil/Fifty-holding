@@ -45,7 +45,7 @@ const Values = () => {
   return (
     <section className="bg-dark_primary  py-20 lg:py-32">
       <Container>
-        <h6 className="text-center text-secondary mb-10 text-4xl uppercase">
+        <h6 className="  mb-10 text-secondary  text-3xl uppercase">
           {t("values")}
         </h6>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
@@ -62,7 +62,7 @@ const Values = () => {
               <h4 className="uppercase text-lg text-white al-medium my-2">
                 {title}
               </h4>
-              <p className="text-white">{text}</p>
+              <p className="text-white text-sm">{text}</p>
             </div>
           ))}
         </div>

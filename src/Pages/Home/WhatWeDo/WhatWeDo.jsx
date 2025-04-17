@@ -65,7 +65,7 @@ const WhatWeDo = () => {
   return (
     <section ref={sectionRef} className="bg-primary py-primary">
       <Container>
-        <h3 className="text-3xl text-secondary mb-10 text-center uppercase">
+        <h3 className="text-3xl text-secondary mb-10 text-centser uppercase">
           {t("what_we_do")}
         </h3>
         <motion.div
@@ -91,7 +91,7 @@ const WhatWeDo = () => {
                     alt=""
                   />
                 </div>
-                <div className="w-3/4 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 transition ease-in duration-300 text-white bg-black bg-opacity-40 group-hover:bg-opacity-60 backdrop-blur-xs text-center text-3xl p-10 rounded-xl">
+                <div className="w-3/4 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 transition ease-in duration-300 text-white bg-black bg-opacity-40 group-hover:bg-opacity-60 backdrop-blur-xs text-censter text-3xl p-10 rounded-xl">
                   <p>{title}</p>
                 </div>
               </div>

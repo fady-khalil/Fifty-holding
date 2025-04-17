@@ -8,7 +8,7 @@ import i2 from "assets/sector/2.jpg";
 import i3 from "assets/sector/3.jpg";
 import i4 from "assets/sector/4.jpg";
 import i5 from "assets/sector/5.jpg";
-import i6 from "assets/sector/6.jpg";
+import i6 from "assets/sector/military-industry.png";
 
 const Sectors = () => {
   const { t } = useTranslation();
@@ -68,18 +68,18 @@ const Sectors = () => {
     },
     {
       title: t("Military_Industries"),
-      image: i5,
+      image: i6,
     },
     {
       title: t("Entertainment"),
-      image: i6,
+      image: i5,
     },
   ];
 
   return (
     <section ref={sectionRef} className="bg-secondary py-primary">
       <Container>
-        <h4 className="text-3xl text-white mb-10 text-center uppercase">
+        <h4 className="text-3xl text-white mb-10 text-csenter uppercase">
           {t("Business_sectors")}
         </h4>
 
@@ -105,7 +105,7 @@ const Sectors = () => {
                   alt={title}
                 />
               </div>
-              <p className="text-center transition ease-in duration-300 group-hover:text-primary text-xl mt-2 uppercase text-white">
+              <p className="text-centser transition ease-in duration-300 group-hover:text-primary text-xl mt-2 uppercase text-white">
                 {title}
               </p>
             </motion.div>

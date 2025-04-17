@@ -87,20 +87,22 @@ const Header = () => {
               isSticky ? "justify-end gap-x-10 " : "mt-auto gap-x-6 "
             } flex-[2] xl:flex items-center text-sm font-[600]`}
           >
-            {["top", "about", "What_we_do"].map((section) => (
-              <a
-                key={section}
-                className={`transition ease-in duration-300 hover:underline ${
-                  selectedSection === section && isSticky
-                    ? "text-secondary"
-                    : "text-primary"
-                }`}
-                href="/"
-                onClick={(e) => handleNavigation(e, section)}
-              >
-                {t(section === "top" ? "Home" : section)}
-              </a>
-            ))}
+            {["top", "about", "What_we_do", "Business_sectors"].map(
+              (section) => (
+                <a
+                  key={section}
+                  className={`transition ease-in duration-300 hover:underline ${
+                    selectedSection === section && isSticky
+                      ? "text-secondary"
+                      : "text-primary"
+                  }`}
+                  href="/"
+                  onClick={(e) => handleNavigation(e, section)}
+                >
+                  {t(section === "top" ? "Home" : section)}
+                </a>
+              )
+            )}
           </nav>
           <div className="flex-1">
             <img
@@ -117,20 +119,22 @@ const Header = () => {
               isSticky ? "gap-x-10" : "mt-auto justify-end gap-x-6"
             } flex-[2] xl:flex items-center text-sm font-[600]`}
           >
-            {["Business_sectors", "our_partners", "contact"].map((section) => (
-              <a
-                key={section}
-                className={`transition ease-in duration-300 hover:underline ${
-                  selectedSection === section && isSticky
-                    ? "text-secondary"
-                    : "text-primary"
-                }`}
-                href="/"
-                onClick={(e) => handleNavigation(e, section)}
-              >
-                {t(section === "contact" ? "Contact_us" : section)}
-              </a>
-            ))}
+            {["Our_clients", "our_partners_header", "contact"].map(
+              (section) => (
+                <a
+                  key={section}
+                  className={`transition ease-in duration-300 hover:underline ${
+                    selectedSection === section && isSticky
+                      ? "text-secondary"
+                      : "text-primary"
+                  }`}
+                  href="/"
+                  onClick={(e) => handleNavigation(e, section)}
+                >
+                  {t(section === "contact" ? "Contact_us" : section)}
+                </a>
+              )
+            )}
           </nav>
 
           <button className="xl:hidden" onClick={toggleMobileView}>
@@ -201,7 +205,7 @@ const Header = () => {
                   handleNavigation(e, "our_partners");
                 }}
               >
-                {t("our_partners")}
+                {t("our_partners_header")}
               </a>
               <a
                 className="border-b border-white py-2"

@@ -19,7 +19,7 @@ const Home = () => {
       <section id="Business_sectors">
         <Sectors />
       </section>
-      <section id="our_partners">
+      <section id="our_partners_header">
         <Subsidiaries />
       </section>
       <section id="Our_clients">

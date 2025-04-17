@@ -16,9 +16,9 @@ const OurClients = () => {
   const logos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8];
   const { t } = useTranslation();
   return (
-    <section className="pb-primary">
+    <section className="py-primary ">
       <Container>
-        <h2 className="text-3xl text-primary mb-6 text-center uppercase">
+        <h2 className="text-3xl text-primary mb-6 text-centser uppercase">
           {t("Our_clients")}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">

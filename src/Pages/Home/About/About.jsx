@@ -21,26 +21,24 @@ const About = () => {
       style={{ backgroundImage: `url(${banner})` }}
     >
       <Container>
-        <div className="text-center pt-[28vh] lg:w-3/4 mx-auto">
-          <h2 className="text-secondary uppercase tracking-wider text-lg">
-            {t("about")}
-          </h2>
-          <p className="mt-2 text-white text-2xl lg:text-3xl al-medium">
+        <div className="pt-[28vh] lg:w-3/4 mx-auto">
+          <h2 className="text-secondary  text-3xl uppercase">{t("about")}</h2>
+          <p className="mt-2 text-white text-2xl  al-medium">
             {t("about_header")}
           </p>
-          <p className="text-white text-2xl lg:text-3xl al-medium mt-4">
+          <p className="text-white text-2xl al-medium mt-2">
             {t("about_text_one")}
           </p>
-          <p className="text-white text-l mt-4">{t("about_text_two")}</p>
-          <p className="text-white text-l mt-2">{t("about_text_three")}</p>
-          <p className="text-white text-l mt-2">{t("about_text_four")}</p>
+          <p className="text-white text-2xl   mt-2">{t("about_text_two")}</p>
+          <p className="text-white text-2xl   mt-2">{t("about_text_three")}</p>
+          <p className="text-white text-2xl   mt-2">{t("about_text_four")}</p>
         </div>
 
         <div className="py-20 lg:py-32 flex flex-col lg:flex-row gap-10 lg:px-32">
           {values.map(({ title, text, array }, index) => (
             <div
               key={index}
-              className="flex-1 border transition ease-in duration-300 border-secondary hover:bg-secondary hover:border-priamry py-8 px-3 text-center text-white rounded-xl"
+              className="flex-1 border transition ease-in duration-300 border-secondary hover:bg-secondary hover:border-priamry py-8 px-3  text-white rounded-xl"
             >
               <p className="al-medium text-3xl capitalize mb-4">{title}</p>
               <p className=" text-sm">{text}</p>
