@@ -60,11 +60,11 @@ const Sectors = () => {
     },
     {
       title: t("Logistics_Services"),
-      image: i3,
+      image: i4,
     },
     {
       title: t("Light_and_Medium_Industries"),
-      image: i4,
+      image: i3,
     },
     {
       title: t("Military_Industries"),

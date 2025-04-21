@@ -212,6 +212,16 @@ const Header = () => {
                 href="/"
                 onClick={(e) => {
                   toggleMobileView();
+                  handleNavigation(e, "Our_clients");
+                }}
+              >
+                {t("Our_clients")}
+              </a>
+              <a
+                className="border-b border-white py-2"
+                href="/"
+                onClick={(e) => {
+                  toggleMobileView();
                   handleNavigation(e, "contact");
                 }}
               >

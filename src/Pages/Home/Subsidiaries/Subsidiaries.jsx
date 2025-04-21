@@ -9,12 +9,13 @@ import image2 from "assets/Subs/2.jpg";
 import image3 from "assets/Subs/3.jpg";
 import image4 from "assets/Subs/4.jpg";
 import image5 from "assets/Subs/5.png";
+import image6 from "assets/Subs/6.png.jpg";
 const Subsidiaries = () => {
   const { t } = useTranslation();
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  const data = [image1, image2, image3, image4, image5];
+  const data = [image1, image2, image3, image4, image5, image6];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -80,7 +81,7 @@ const Subsidiaries = () => {
 
         {/* Subsidiaries Cards */}
         <motion.div
-          className="grid grid-cols-5 gap-8 justify-center items-center"
+          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-5 justify-center items-center"
           // className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
@@ -91,7 +92,7 @@ const Subsidiaries = () => {
               <img
                 src={image}
                 alt={`Subsidiary Background ${index + 1}`}
-                className="w-full h-[200px] p-2 border border-secondary rounded-xl"
+                className="w-full h-[250px] object-contain lg:h-[200px] p-1 border border-secondary rounded-xl"
               />
             </motion.div>
           ))}
