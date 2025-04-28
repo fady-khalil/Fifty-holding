@@ -70,17 +70,17 @@ const Subsidiaries = () => {
     <section ref={sectionRef} className="pt-primary ">
       <Container>
         {/* Section Title */}
-        <motion.h3
+        <h3
           initial={{ opacity: 0, y: -20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="text-3xl text-primary mb-6 text-csenter uppercase"
         >
           {t("our_partners")}
-        </motion.h3>
+        </h3>
 
         {/* Subsidiaries Cards */}
-        <motion.div
+        <div
           className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-5 justify-center items-center"
           // className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
@@ -88,15 +88,15 @@ const Subsidiaries = () => {
           animate={isVisible ? "visible" : "hidden"} // Replay animation based on visibility
         >
           {data.map((image, index) => (
-            <motion.div className={``} key={index} variants={cardVariants}>
+            <div className={``} key={index} variants={cardVariants}>
               <img
                 src={image}
                 alt={`Subsidiary Background ${index + 1}`}
                 className="w-full h-[250px] object-contain lg:h-[200px] p-1 border border-secondary rounded-xl"
               />
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </Container>
     </section>
   );
