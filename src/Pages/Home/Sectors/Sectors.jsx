@@ -1,45 +1,37 @@
+// src/Pages/Home/Sectors/Sectors.jsx
+
 import React, { useEffect, useRef, useState } from "react";
 import Container from "Components/Container/Container";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-
-import i1 from "assets/sector/1.jpg";
-import i2 from "assets/sector/2.jpg";
-import i3 from "assets/sector/3.jpg";
-import i4 from "assets/sector/4.jpg";
-import i5 from "assets/sector/5.jpg";
-import i6 from "assets/sector/military-industry.png";
+import axios from "axios";
 
 const Sectors = () => {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [scoresData, setScoresData] = useState([]);
+
+  // Normalize backslashes
+  const getImageUrl = (rawUrl) => (rawUrl ? rawUrl.replace(/\\/g, "/") : null);
 
   useEffect(() => {
-    // Determine the threshold value based on screen width
-    const thresholdValue = window.innerWidth <= 768 ? 0.2 : 0.2;
+    const lang = i18n.language.startsWith("ar") ? "ar" : "en";
+    axios
+      .get(`https://phplaravel-1177998-5506307.cloudwaysapps.com/api/${lang}/home`)
+      .then(({ data }) => setScoresData(data.our_bussiness_scores || []))
+      .catch((err) => console.error("Error fetching sectors data:", err));
+  }, [i18n.language]);
 
+  useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      {
-        threshold: thresholdValue, // Dynamically set threshold
-      }
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => sectionRef.current && observer.unobserve(sectionRef.current);
   }, []);
 
-  // Fade-in animation for the grid items
   const fadeInVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -49,68 +41,55 @@ const Sectors = () => {
     },
   };
 
-  const data = [
-    {
-      title: t("Construction_and_Infrastructure"),
-      image: i1,
-    },
-    {
-      title: t("Maintenance_and_Operations"),
-      image: i2,
-    },
-    {
-      title: t("Logistics_Services"),
-      image: i4,
-    },
-    {
-      title: t("Light_and_Medium_Industries"),
-      image: i3,
-    },
-    {
-      title: t("Military_Industries"),
-      image: i6,
-    },
-    {
-      title: t("Entertainment"),
-      image: i5,
-    },
-  ];
-
   return (
-    <section ref={sectionRef} className="bg-secondary py-primary">
+    <section ref={sectionRef} className="bg-secondary py-20">
       <Container>
-        <h4 className="text-3xl text-white mb-10 text-csenter uppercase">
-          {t("Business_sectors")}
+        <h4 className="text-3xl text-white mb-10 text-center uppercase">
+          {i18n.language.startsWith("ar")
+            ? "قطاعات الأعمال"
+            : "Business Sectors"}
         </h4>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14"
-          initial="hidden"
-          animate={isVisible ? "visible" : "hidden"}
-          variants={fadeInVariants}
-        >
-          {data.map(({ title, image }, index) => (
-            <motion.div
-              key={index}
-              className="group"
-              initial="hidden"
-              animate={isVisible ? "visible" : "hidden"}
-              variants={fadeInVariants}
-              transition={{ delay: index * 0.2 }} // Sequential fade-in for each item
-            >
-              <div className="overflow-hidden rounded-xl">
-                <img
-                  className="h-[250px] object-cover lg:h-[200px] transition ease-in duration-300 group-hover:scale-[1.05] w-full rounded-xl"
-                  src={image}
-                  alt={title}
-                />
-              </div>
-              <p className="text-centser transition ease-in duration-300 group-hover:text-primary text-xl mt-2 uppercase text-white">
-                {title}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
+        {!scoresData.length ? (
+          <p className="text-center text-white">Loading...</p>
+        ) : (
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14"
+            initial="hidden"
+            animate={isVisible ? "visible" : "hidden"}
+            variants={fadeInVariants}
+          >
+            {scoresData.map(({ image, title }, index) => (
+              <motion.div
+                key={index}
+                className="group"
+                initial="hidden"
+                animate={isVisible ? "visible" : "hidden"}
+                variants={fadeInVariants}
+                transition={{ delay: index * 0.2 }}
+              >
+                <div className="overflow-hidden rounded-xl bg-gray-700">
+                  {getImageUrl(image) ? (
+                    <img
+                      src={getImageUrl(image)}
+                      alt={title}
+                      className="h-[250px] object-cover lg:h-[200px] transition-transform duration-300 group-hover:scale-[1.05] w-full rounded-xl"
+                    />
+                  ) : (
+                    <div className="h-[250px] lg:h-[200px] flex items-center justify-center w-full rounded-xl bg-gray-600">
+                      <span className="text-white uppercase text-xl px-4 text-center">
+                        {title}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <p className="mt-2 text-center transition ease-in duration-300 group-hover:text-primary text-xl uppercase text-white">
+                  {title}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </Container>
     </section>
   );

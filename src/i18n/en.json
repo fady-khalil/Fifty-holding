@@ -5,8 +5,8 @@
   "Business_sectors": "Business sectors",
   "our_partners": "Partners in Success ",
   "Contact_us": "Contact us",
-  "Our_clients": "clients",
-  "our_partners_header": "partners",
+  "Our_clients": "Clients",
+  "our_partners_header": "Partners",
 
   "Learn_more": "Learn more",
 
@@ -59,5 +59,18 @@
   "Entertainment": "Entertainment",
 
   "address": "Makkah Almukaram Branch Road, East Umm Al Hamam District, Riyadh 12321",
-  "rights": "All Rights Reserved International Fifty Holding Co. 2024"
+  "rights": "All Rights Reserved International Fifty Holding Co. 2024",
+
+  "about_us_title": "About Us",
+
+  "about_us_investment_title": "A Saudi investment company",
+  "about_us_investment_sub_title": "A Saudi investment company specialized in establishing and managing diversified commercial, industrial, and agricultural assets. We move forward in alignment with the vision of our blessed nation and leaders.",
+  "about_us_investment_description": "We have a renewed passion for making our investment entity a pillar of local development on various levels. Our team consists of young national talents enriched with great experience. Our constant passion is to achieve innovation, development, and elevate quality standards in our areas of work. We expand from our local roots to global horizons with balanced thinking, steady steps, and a renewed spirit that reflects our authenticity and proud commercial heritage.",
+
+  "get_in_touch": "Get in touch",
+  "name": "name",
+  "email": "email",
+  "subject": "subject",
+  "message": "message",
+  "submit": "submit"
 }

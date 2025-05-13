@@ -1,31 +1,39 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
 import Container from "Components/Container/Container";
-
-import logo1 from "assets/clients/1.jpg";
-import logo2 from "assets/clients/2.jpg";
-import logo3 from "assets/clients/3.jpg";
-import logo4 from "assets/clients/4.jpg";
-import logo5 from "assets/clients/5.jpg";
-import logo6 from "assets/clients/6.jpg";
-import logo7 from "assets/clients/7.jpg";
-import logo8 from "assets/clients/8.jpg";
+import axios from "axios";
 
 const OurClients = () => {
-  const logos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8];
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const response = await axios.get(
+          `https://phplaravel-1177998-5506307.cloudwaysapps.com/api/${i18n.language}/home`
+        );
+        setClients(response.data.our_clients || []);
+      } catch (error) {
+        console.error("Failed to fetch clients:", error);
+      }
+    };
+
+    fetchClients();
+  }, [i18n.language]);
+
   return (
-    <section className="py-primary ">
+    <section className="py-primary">
       <Container>
-        <h2 className="text-3xl text-primary mb-6 text-centser uppercase">
+        <h2 className="text-3xl text-primary mb-6 text-center uppercase">
           {t("Our_clients")}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
-          {logos.map((logo, index) => (
+          {clients.map((client, index) => (
             <img
+              key={index}
               className="w-[95%] mx-auto"
-              src={logo}
+              src={client.image.replace(/\\/g, "/")}
               alt={`Client ${index + 1}`}
             />
           ))}

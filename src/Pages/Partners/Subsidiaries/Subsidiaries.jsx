@@ -2,32 +2,29 @@ import React, { useRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import Container from "Components/Container/Container";
-import axios from "axios";
 
 const Subsidiaries = () => {
   const { t, i18n } = useTranslation();
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [images, setImages] = useState([]);
+  const [partners, setPartners] = useState([]);
 
-  // Fetch data from API
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPartners = async () => {
       try {
-        const locale = i18n.language || "en"; // Use current language
-        const response = await axios.get(
-          `https://phplaravel-1177998-5506307.cloudwaysapps.com/api/${locale}/home`
+        const response = await fetch(
+          `https://phplaravel-1177998-5506307.cloudwaysapps.com/api/${i18n.language}/partners`
         );
-        setImages(response.data?.our_partners || []);
+        const data = await response.json();
+        setPartners(data.our_partners || []);
       } catch (error) {
-        console.error("Failed to fetch partners data:", error);
+        console.error("Error fetching partners:", error);
       }
     };
 
-    fetchData();
+    fetchPartners();
   }, [i18n.language]);
 
-  // Intersection Observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -40,7 +37,6 @@ const Subsidiaries = () => {
     return () => sectionRef.current && observer.unobserve(sectionRef.current);
   }, []);
 
-  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -65,9 +61,8 @@ const Subsidiaries = () => {
   };
 
   return (
-    <section ref={sectionRef} className="pt-primary">
+    <section ref={sectionRef} className="pt-primary mb-20">
       <Container>
-        {/* Section Title */}
         <motion.h3
           initial={{ opacity: 0, y: -20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
@@ -77,18 +72,17 @@ const Subsidiaries = () => {
           {t("our_partners")}
         </motion.h3>
 
-        {/* Images Grid */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-5 justify-center items-center"
           variants={containerVariants}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
         >
-          {images.map((item, index) => (
+          {partners.map((partner, index) => (
             <motion.div key={index} variants={cardVariants}>
               <img
-                src={item.image.replace(/\\/g, "/")}
-                alt={`Subsidiary ${index + 1}`}
+                src={partner.image.replace(/\\/g, "/")}
+                alt={`Partner ${index + 1}`}
                 className="w-full h-[250px] object-contain lg:h-[200px] p-1 border border-secondary rounded-xl"
               />
             </motion.div>

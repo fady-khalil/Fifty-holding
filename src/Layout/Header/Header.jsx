@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import Container from "Components/Container/Container";
 import logo from "assets/50-l.jpg";
+import { Link, useLocation } from "react-router-dom";
+
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { List, X } from "@phosphor-icons/react";
+
 const Header = () => {
   const { t } = useTranslation();
+  const location = useLocation();
   const [isSticky, setIsSticky] = useState(false);
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const [mobileMenuVisible, setMobileMenuVisble] = useState(false);
@@ -66,11 +70,22 @@ const Header = () => {
     setMobileMenuVisble((cur) => !cur);
   };
 
+  const isAboutUsPage = location.pathname === "/about-us";
+  const isWhoWeDoPage = location.pathname === "/who-we-do";
+  const isBusinessSectorsPage = location.pathname === "/business-sectors";
+  const isPartnersPage = location.pathname === "/partners";
+  const isClientsPage = location.pathname === "/clients";
+  const isContactUsPage = location.pathname === "/contact-us";
+
   return (
     <header
-      ref={headerRef} // Reference to the header element
+      ref={headerRef}
       className={`transition ease-in duration-300 ${
         isSticky ? "sticky top-0 z-[1000] bg-white border-b border-primary" : ""
+      } ${
+        (isAboutUsPage || isWhoWeDoPage || isBusinessSectorsPage) && !isSticky
+          ? "absolute top-0 left-0 w-full z-[1000]"
+          : ""
       }`}
     >
       <Container className={`${isSticky ? "" : "relative"}`}>
@@ -81,38 +96,74 @@ const Header = () => {
         >
           <LanguageSwitcher />
         </div>
-        <div className="flex justify-between uppercase text-primary mt-4">
+        <div className="flex justify-between uppercase text-primary mb-4">
           <nav
             className={`hidden min-h-full ${
               isSticky ? "justify-end gap-x-10 " : "mt-auto gap-x-6 "
             } flex-[2] xl:flex items-center text-sm font-[600]`}
           >
             {["top", "about", "What_we_do", "Business_sectors"].map(
-              (section) => (
-                <a
-                  key={section}
-                  className={`transition ease-in duration-300 hover:underline ${
-                    selectedSection === section && isSticky
-                      ? "text-secondary"
-                      : "text-primary"
-                  }`}
-                  href="/"
-                  onClick={(e) => handleNavigation(e, section)}
-                >
-                  {t(section === "top" ? "Home" : section)}
-                </a>
-              )
+              (section) => {
+                const linkClass = `transition ease-in duration-300 hover:underline ${
+                  (isAboutUsPage || isWhoWeDoPage || isBusinessSectorsPage) &&
+                  !isSticky
+                    ? "text-white"
+                    : selectedSection === section && isSticky
+                    ? "text-secondary"
+                    : "text-primary"
+                }`;
+
+                if (section === "top") {
+                  return (
+                    <Link key={section} to="/" className={linkClass}>
+                      {t("Home")}
+                    </Link>
+                  );
+                }
+
+                if (section === "about") {
+                  return (
+                    <Link key={section} to="/about-us" className={linkClass}>
+                      {t("about")}
+                    </Link>
+                  );
+                }
+
+                if (section === "What_we_do") {
+                  return (
+                    <Link key={section} to="/who-we-do" className={linkClass}>
+                      {t(section)}
+                    </Link>
+                  );
+                }
+
+                if (section === "Business_sectors") {
+                  return (
+                    <Link
+                      key={section}
+                      to="/business-sectors"
+                      className={linkClass}
+                    >
+                      {t(section)}
+                    </Link>
+                  );
+                }
+
+                return null;
+              }
             )}
           </nav>
+
           <div className="flex-1">
-            <img
-              className={`cursor-pointer  transition-width ease-in duration-200  xl:mx-auto mt-2 ${
-                isSticky ? "w-3/4" : "w-1/2 md:w-1/3 xl:w-full"
-              }`}
-              src={logo}
-              alt="Company Logo"
-              onClick={(e) => handleNavigation(e, "top")}
-            />
+            <Link to="/">
+              <img
+                className={`cursor-pointer transition-width ease-in duration-200 xl:mx-auto mt-2 ${
+                  isSticky ? "w-3/4" : "w-1/2 md:w-1/3 xl:w-full"
+                }`}
+                src={logo}
+                alt="Company Logo"
+              />
+            </Link>
           </div>
           <nav
             className={`hidden min-h-full ${
@@ -120,20 +171,59 @@ const Header = () => {
             } flex-[2] xl:flex items-center text-sm font-[600]`}
           >
             {["our_partners_header", "Our_clients", "contact"].map(
-              (section) => (
-                <a
-                  key={section}
-                  className={`transition ease-in duration-300 hover:underline ${
-                    selectedSection === section && isSticky
-                      ? "text-secondary"
-                      : "text-primary"
-                  }`}
-                  href="/"
-                  onClick={(e) => handleNavigation(e, section)}
-                >
-                  {t(section === "contact" ? "Contact_us" : section)}
-                </a>
-              )
+              (section) => {
+                let linkColor = "text-primary";
+
+                if (!isSticky) {
+                  if (isAboutUsPage || isWhoWeDoPage || isBusinessSectorsPage) {
+                    linkColor = "text-white";
+                  } else if (
+                    isPartnersPage ||
+                    isClientsPage ||
+                    isContactUsPage
+                  ) {
+                    linkColor = "text-primary";
+                  }
+                }
+
+                const linkClass = `transition ease-in duration-300 hover:underline ${linkColor}`;
+
+                if (section === "our_partners_header") {
+                  return (
+                    <Link key={section} to="/partners" className={linkClass}>
+                      {t(section)}
+                    </Link>
+                  );
+                }
+
+                if (section === "Our_clients") {
+                  return (
+                    <Link key={section} to="/clients" className={linkClass}>
+                      {t(section)}
+                    </Link>
+                  );
+                }
+
+                if (section === "contact") {
+                  // إضافة الرابط الخاص بـ "Contact Us"
+                  return (
+                    <Link key={section} to="/contact-us" className={linkClass}>
+                      {t("Contact_us")}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <a
+                    key={section}
+                    className={linkClass}
+                    href="/"
+                    onClick={(e) => handleNavigation(e, section)}
+                  >
+                    {t(section === "contact" ? "Contact_us" : section)}
+                  </a>
+                );
+              }
             )}
           </nav>
 
@@ -167,36 +257,30 @@ const Header = () => {
               >
                 {t("Home")}
               </a>
-              <a
+              <Link
+                to="/about-us"
                 className="border-b border-white py-2"
-                href="/"
-                onClick={(e) => {
-                  toggleMobileView();
-                  handleNavigation(e, "about");
-                }}
+                onClick={() => toggleMobileView()}
               >
                 {t("about")}
-              </a>
-              <a
+              </Link>
+
+              <Link
+                to="/who-we-are"
                 className="border-b border-white py-2"
-                href="/"
-                onClick={(e) => {
-                  toggleMobileView();
-                  handleNavigation(e, "whatWeDo");
-                }}
+                onClick={() => toggleMobileView()}
               >
                 {t("What_we_do")}
-              </a>
-              <a
+              </Link>
+
+              <Link
+                to="/business-sectors"
                 className="border-b border-white py-2"
-                href="/"
-                onClick={(e) => {
-                  toggleMobileView();
-                  handleNavigation(e, "Business_sectors");
-                }}
+                onClick={() => toggleMobileView()}
               >
                 {t("Business_sectors")}
-              </a>
+              </Link>
+
               <a
                 className="border-b border-white py-2"
                 href="/"
