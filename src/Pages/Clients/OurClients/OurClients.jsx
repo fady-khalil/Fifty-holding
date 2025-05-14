@@ -23,11 +23,9 @@ const OurClients = () => {
   }, [i18n.language]);
 
   return (
-    <section className="py-primary">
+    <section className="mb-6">
       <Container>
-        <h2 className="text-3xl text-primary mb-6 text-center uppercase">
-          {t("Our_clients")}
-        </h2>
+        
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
           {clients.map((client, index) => (
             <img
